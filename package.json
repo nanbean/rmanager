@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "koa": "^2.4.1",
+    "koa-router": "^7.3.0",
+    "koa-static": "^4.0.1",
     "prop-types": "^15.6.0",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
