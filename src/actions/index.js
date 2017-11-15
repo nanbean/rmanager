@@ -44,7 +44,7 @@ const onmessage = (e) => {
 
 export const connectSocketAction = (yanoljaId, yanoljaPwd) => (dispatch) => {
 	if (!socket) {
-		socket = new WebSocket('ws://nanbean.net:3005/socketServer', 'protocolOne');
+		socket = new WebSocket('ws://125.131.73.161:3005/socketServer', 'protocolOne');
 
 		socket.onmessage = (e) => {
 			dispatch(onmessage(e));
