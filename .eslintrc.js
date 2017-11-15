@@ -8,8 +8,8 @@ module.exports = {
         "foo": true,
         "window": true,
         "fetch": true,
-        "EventSource": true,
-        "FormData": true
+        "WebSocket": true,
+        "FormData": true,
     },
     "rules": {
         "no-console": "off",

@@ -1,3 +1,5 @@
+let socket = null;
+
 function getCall (call) {
 	return fetch(call, {
 		method: 'GET',
@@ -7,11 +9,6 @@ function getCall (call) {
 		}
 	});
 }
-
-export const setQuizId = params => ({
-	type: 'SET_QUIZ_ID',
-	payload: params
-});
 
 export const searchAction = date => (dispatch) => {
 	const searchApi = `https://www.yanolja.com/hub/joy/v6-6/adverts?advert=AROUND&checkinDate=${date}&checkoutDate=${date}&gaList=Around&lat=37.2022147&limit=20&lng=127.0835804&myRoom=0&page=1&searchType=re`;
@@ -32,3 +29,40 @@ export const searchAction = date => (dispatch) => {
 	);
 };
 
+const onmessage = (e) => {
+	const data = JSON.parse(e.data);
+
+	if (data.action === 'getReservation' && typeof data.hitCount !== 'undefined') {
+		return ({
+			type: 'SET_HIT_COUNT',
+			payload: data.hitCount
+		});
+	}
+
+	return 0;
+};
+
+export const connectSocketAction = (yanoljaId, yanoljaPwd) => (dispatch) => {
+	if (!socket) {
+		socket = new WebSocket('ws://125.131.73.161:3005/socketServer', 'protocolOne');
+
+		socket.onmessage = (e) => {
+			dispatch(onmessage(e));
+		};
+	}
+
+	const msg = {
+		action: 'getReservation',
+		yanoljaId,
+		yanoljaPwd
+	};
+
+	if (socket.readyState === 1) {
+		socket.send(JSON.stringify(msg));
+	} else {
+		socket.onopen = () => {
+			socket.send(JSON.stringify(msg));
+			socket.onopen = null;
+		};
+	}
+};
