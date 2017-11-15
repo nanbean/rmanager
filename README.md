@@ -8,9 +8,12 @@ yarn install
 
 npm install phantom -g
 npm install phantomjs -g
-npm install casperjs
-cd node_module/casperjs
+npm install casperjs -g
+npm install spooky
+cd node_modules/spooky
 npm install
+
+yarn build
 ```
 
 How to develop
