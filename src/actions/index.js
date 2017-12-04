@@ -10,23 +10,25 @@ function getCall (call) {
 	});
 }
 
-export const searchAction = date => (dispatch) => {
-	const searchApi = `https://www.yanolja.com/hub/joy/v6-6/adverts?advert=AROUND&checkinDate=${date}&checkoutDate=${date}&gaList=Around&lat=37.2022147&limit=20&lng=127.0835804&myRoom=0&page=1&searchType=re`;
+export const searchAction = (date, lat, lng) => (dispatch) => {
+	if (date && lat && lng) {
+		const searchApi = `https://www.yanolja.com/hub/joy/v6-6/adverts?advertsPosition=MAIN&checkinDate=${date}&checkoutDate=${date}&gaList=Around&lat=${lat.toFixed(7)}&limit=20&lng=${lng.toFixed(7)}&myRoom=0&page=1&searchType=recommend`;
 
-	getCall(searchApi).then(
-		response => (
-			response.json()
-		)
-	).then(
-		(result) => {
-			if (result.lists) {
-				dispatch({
-					type: 'SET_SEARCH_LIST',
-					payload: result.lists
-				});
+		getCall(searchApi).then(
+			response => (
+				response.json()
+			)
+		).then(
+			(result) => {
+				if (result.lists) {
+					dispatch({
+						type: 'SET_SEARCH_LIST',
+						payload: result.lists
+					});
+				}
 			}
-		}
-	);
+		);
+	}
 };
 
 const onmessage = (e) => {

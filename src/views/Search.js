@@ -3,35 +3,70 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { withRouter } from 'react-router-dom';
-import { Header, Table } from 'semantic-ui-react';
+import { Header, Table, Icon } from 'semantic-ui-react';
 
 import TitleHeader from '../components/TitleHeader';
+import SearchMap from '../components/SearchMap';
 
 import strings from '../resources/strings';
 
 import { searchAction } from '../actions';
 
+const defaultMarkerPositionLat = 37.48351904546265;
+const defaultMarkerPositionLng = 127.04403751324458;
+
 class Search extends Component {
+	constructor (props) {
+		super(props);
+
+		this.onMarkerDragEnd = this.onMarkerDragEnd.bind(this);
+
+		this.state = {
+			yanoljaId: null,
+			yanoljaPwd: null
+		};
+	}
+
 	componentWillMount () {
-		this.props.searchAction(new Date().toISOString().slice(0, 10));
+		this.props.searchAction(
+			new Date().toISOString().slice(0, 10),
+			defaultMarkerPositionLat,
+			defaultMarkerPositionLng
+		);
+	}
+
+	onMarkerDragEnd (ev) {
+		if (ev.latLng) {
+			const lat = ev.latLng.lat();
+			const lng = ev.latLng.lng();
+			this.props.searchAction(
+				new Date().toISOString().slice(0, 10),
+				lat,
+				lng
+			);
+		}
 	}
 
 	renderLists (data) {
 		this.key = data.key;
 		this.name = data.name;
+		this.distance = data.distance;
 		this.rentDiscountPrice = data.rentDiscountPrice;
 		this.stayDiscountPrice = data.stayDiscountPrice;
 
 		return (
 			<Table.Row key={this.key}>
-				<Table.Cell>
-					<Header as='h4' textAlign='center'>{this.name}</Header>
+				<Table.Cell textAlign='center'>
+					<Icon name='h' />{this.name}
 				</Table.Cell>
-				<Table.Cell>
-					<Header as='h4' textAlign='center'>{this.rentDiscountPrice}</Header>
+				<Table.Cell textAlign='center'>
+					{this.distance}
 				</Table.Cell>
-				<Table.Cell>
-					<Header as='h4' textAlign='center'>{this.stayDiscountPrice}</Header>
+				<Table.Cell textAlign='center'>
+					{parseInt(this.rentDiscountPrice, 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+				</Table.Cell>
+				<Table.Cell textAlign='center'>
+					{parseInt(this.stayDiscountPrice, 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 				</Table.Cell>
 			</Table.Row>
 		);
@@ -49,18 +84,29 @@ class Search extends Component {
 					icon='search'
 					title={strings.search}
 				/>
+				<Header as='h2'>
+					{strings.searchHelp}
+				</Header>
+				<SearchMap
+					markerPositionLat={defaultMarkerPositionLat}
+					markerPositionLng={defaultMarkerPositionLng}
+					onMarkerDragEnd={this.onMarkerDragEnd}
+				/>
 				<div>
 					<Table celled selectable>
 						<Table.Header>
 							<Table.Row>
 								<Table.HeaderCell>
-									<Header as='h4' textAlign='center'>Name</Header>
+									<Header as='h4' textAlign='center'>{strings.accommodationName}</Header>
 								</Table.HeaderCell>
 								<Table.HeaderCell>
-									<Header as='h4' textAlign='center'>Rent Price</Header>
+									<Header as='h4' textAlign='center'>{strings.distance}</Header>
 								</Table.HeaderCell>
 								<Table.HeaderCell>
-									<Header as='h4' textAlign='center'>Stay Price</Header>
+									<Header as='h4' textAlign='center'>{strings.rentReservation}</Header>
+								</Table.HeaderCell>
+								<Table.HeaderCell>
+									<Header as='h4' textAlign='center'>{strings.stayReservation}</Header>
 								</Table.HeaderCell>
 							</Table.Row>
 						</Table.Header>
@@ -86,8 +132,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	searchAction (param) {
-		dispatch(searchAction(param));
+	searchAction (date, lat, lng) {
+		dispatch(searchAction(date, lat, lng));
 	}
 });
 
