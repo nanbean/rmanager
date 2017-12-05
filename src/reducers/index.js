@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 import search from './search';
 import hitCount from './hitCount';
 
-const gamequiz = combineReducers({
+const rmanager = combineReducers({
 	search,
 	hitCount
 });
 
-export default gamequiz;
+export default rmanager;
