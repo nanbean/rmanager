@@ -51,6 +51,14 @@ class TopMenu extends Component {
 				>
 					{strings.search}
 				</Menu.Item>
+
+				<Menu.Item
+					name='/account'
+					active={activeItem === '/account'}
+					onClick={this.handleItemClick}
+				>
+					{strings.account}
+				</Menu.Item>
 			</Menu>
 		);
 	}

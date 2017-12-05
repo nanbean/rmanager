@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import TopMenu from './components/TopMenu';
 
-import { Home, Reservation, Search } from './views';
+import { Home, Reservation, Search, Account } from './views';
 import './App.css';
 
 // this is basic navigation structure
@@ -12,6 +12,7 @@ const Routing = () => (
 		<Route exact path='/' component={Home} />
 		<Route exact path='/reservation' component={Reservation} />
 		<Route path='/search' component={Search} />
+		<Route path='/account' component={Account} />
 	</div>
 );
 

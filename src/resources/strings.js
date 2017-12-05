@@ -13,7 +13,10 @@ const strings = new LocalizedStrings({
 		distance: 'Distance',
 		rentReservation: 'Rent Reservation',
 		stayReservation: 'Stay Reservation',
-		searchHelp: 'Move 📍 to search different location'
+		searchHelp: 'Move 📍 to search different location',
+		account: 'Account',
+		googleLogin: 'Login with Google',
+		googleLogout: 'Logout with Google'
 	},
 	ko: {
 		home: '홈',
@@ -27,7 +30,10 @@ const strings = new LocalizedStrings({
 		distance: '거리',
 		rentReservation: '대실예약',
 		stayReservation: '숙박예약',
-		searchHelp: '📍를 이동해서 원하는 지역을 검색하세요.'
+		searchHelp: '📍를 이동해서 원하는 지역을 검색하세요.',
+		account: '계정',
+		googleLogin: '구글 아이디로 로그인',
+		googleLogout: '구글 아이디로 로그아웃'
 	}
 });
 

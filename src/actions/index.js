@@ -1,5 +1,10 @@
 let socket = null;
 
+export const setGoogleLoginAction = params => ({
+	type: 'SET_GOOGLE_LOGIN',
+	payload: params
+});
+
 function getCall (call) {
 	return fetch(call, {
 		method: 'GET',
