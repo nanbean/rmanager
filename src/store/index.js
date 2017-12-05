@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import gamequiz from '../reducers';
+import rmanager from '../reducers';
 
 export default function configureStore (initialState) {
 	const store = createStore(
-		gamequiz,
+		rmanager,
 		initialState,
 		applyMiddleware(thunkMiddleware) // lets us dispatch functions
 	);
