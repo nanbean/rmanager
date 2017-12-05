@@ -5,6 +5,8 @@ import { Header, Table, Icon } from 'semantic-ui-react';
 
 import strings from '../resources/strings';
 
+import '../styles/search.css';
+
 class SearchResult extends Component {
 	renderLists (data) {
 		this.key = data.key;
@@ -35,7 +37,7 @@ class SearchResult extends Component {
 		const { search } = this.props;
 
 		return (
-			<div>
+			<div className='search-result'>
 				<Table celled selectable>
 					<Table.Header>
 						<Table.Row>

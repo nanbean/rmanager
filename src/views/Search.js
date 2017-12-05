@@ -14,6 +14,8 @@ import strings from '../resources/strings';
 
 import { searchAction } from '../actions';
 
+import '../styles/search.css';
+
 const defaultMarkerPositionLat = 37.48351904546265;
 const defaultMarkerPositionLng = 127.04403751324458;
 
@@ -51,7 +53,7 @@ class Search extends Component {
 
 	render () {
 		return (
-			<div>
+			<div className='search'>
 				<Helmet>
 					<title>{strings.search}</title>
 				</Helmet>
