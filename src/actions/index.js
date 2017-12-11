@@ -15,6 +15,60 @@ function getCall (call) {
 	});
 }
 
+export const getReservationAction = (startDate, endDate) => (dispatch) => {
+	if (startDate) {
+		let searchApi = '';
+
+		if (startDate && endDate) {
+			searchApi = `http://125.131.73.28:5002/api/booking/date?start=${startDate}&end=${endDate}`;
+		} else {
+			searchApi = `http://125.131.73.28:5002/api/booking/date?start=${startDate}`;
+		}
+
+		getCall(searchApi).then(
+			response => (
+				response.json()
+			)
+		).then(
+			(result) => {
+				if (result.data) {
+					dispatch({
+						type: 'SET_RESERVATION_LIST',
+						payload: result.data
+					});
+				}
+			}
+		);
+	}
+};
+
+export const getSummaryAction = (startDate, endDate) => (dispatch) => {
+	if (startDate) {
+		let searchApi = '';
+
+		if (startDate && endDate) {
+			searchApi = `http://125.131.73.28:5002/api/booking/date?start=${startDate}&end=${endDate}`;
+		} else {
+			searchApi = `http://125.131.73.28:5002/api/booking/date?start=${startDate}`;
+		}
+
+		getCall(searchApi).then(
+			response => (
+				response.json()
+			)
+		).then(
+			(result) => {
+				if (result.data) {
+					dispatch({
+						type: 'SET_SUMMARY_LIST',
+						payload: result.data
+					});
+				}
+			}
+		);
+	}
+};
+
 export const searchAction = (date, lat, lng) => (dispatch) => {
 	if (date && lat && lng) {
 		const searchApi = `https://www.yanolja.com/hub/joy/v6-6/adverts?advertsPosition=MAIN&checkinDate=${date}&checkoutDate=${date}&gaList=Around&lat=${lat.toFixed(7)}&limit=20&lng=${lng.toFixed(7)}&myRoom=0&page=1&searchType=recommend`;

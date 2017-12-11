@@ -27,6 +27,8 @@ run app in different terminal
 yarn start
 ```
 
+modify .env.development to use proxy
+
 Before commit
 -------
 You have to check eslint

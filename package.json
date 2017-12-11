@@ -7,9 +7,11 @@
     "koa-router": "^7.3.0",
     "koa-static": "2.1.0",
     "koa-websocket": "^4.1.0",
+    "moment": "^2.19.4",
     "prop-types": "^15.6.0",
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-google-charts": "^1.5.5",
     "react-google-login": "^3.0.2",
     "react-google-maps": "^9.4.1",
     "react-helmet": "^5.2.0",
@@ -21,7 +23,8 @@
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "semantic-ui-react": "^0.76.0"
+    "semantic-ui-react": "^0.76.0",
+    "spooky": "^0.2.5"
   },
   "scripts": {
     "start": "NODE_PATH=src react-scripts start",
@@ -33,5 +36,6 @@
   "devDependencies": {
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-react": "^7.4.0"
-  }
+  },
+  "proxy": "http://125.131.73.28"
 }

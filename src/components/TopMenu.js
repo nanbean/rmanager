@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react';
+import { Image, Menu } from 'semantic-ui-react';
 
 import strings from '../resources/strings';
+
+import '../styles/main.css';
+
+import logo from '../assets/logo.png';
 
 class TopMenu extends Component {
 	constructor (props) {
@@ -27,39 +31,42 @@ class TopMenu extends Component {
 		const { activeItem } = this.state;
 
 		return (
-			<Menu>
-				<Menu.Item
-					name='/'
-					active={activeItem === '/'}
-					onClick={this.handleItemClick}
-				>
-					{strings.home}
-				</Menu.Item>
+			<div className='main'>
+				<Image src={logo} centered />
+				<Menu>
+					<Menu.Item
+						name='/'
+						active={activeItem === '/'}
+						onClick={this.handleItemClick}
+					>
+						{strings.home}
+					</Menu.Item>
 
-				<Menu.Item
-					name='/reservation'
-					active={activeItem === '/reservation'}
-					onClick={this.handleItemClick}
-				>
-					{strings.reservation}
-				</Menu.Item>
+					<Menu.Item
+						name='/reservation'
+						active={activeItem === '/reservation'}
+						onClick={this.handleItemClick}
+					>
+						{strings.reservation}
+					</Menu.Item>
 
-				<Menu.Item
-					name='/search'
-					active={activeItem === '/search'}
-					onClick={this.handleItemClick}
-				>
-					{strings.search}
-				</Menu.Item>
+					<Menu.Item
+						name='/search'
+						active={activeItem === '/search'}
+						onClick={this.handleItemClick}
+					>
+						{strings.search}
+					</Menu.Item>
 
-				<Menu.Item
-					name='/account'
-					active={activeItem === '/account'}
-					onClick={this.handleItemClick}
-				>
-					{strings.account}
-				</Menu.Item>
-			</Menu>
+					<Menu.Item
+						name='/account'
+						active={activeItem === '/account'}
+						onClick={this.handleItemClick}
+					>
+						{strings.account}
+					</Menu.Item>
+				</Menu>
+			</div>
 		);
 	}
 }

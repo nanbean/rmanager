@@ -3,93 +3,59 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { withRouter } from 'react-router-dom';
-import { Header, Input, Button } from 'semantic-ui-react';
+import moment from 'moment';
+
 import TitleHeader from '../components/TitleHeader';
+import ReservationResult from './ReservationResult';
 
 import strings from '../resources/strings';
 
-import { connectSocketAction } from '../actions';
+import { getReservationAction } from '../actions';
 
 class Reservation extends Component {
 	constructor (props) {
 		super(props);
 
-		this.onYanoljaIdChange = this.onYanoljaIdChange.bind(this);
-		this.onYanoljaPwdChange = this.onYanoljaPwdChange.bind(this);
-		this.getReservationClick = this.getReservationClick.bind(this);
-
 		this.state = {
-			yanoljaId: null,
-			yanoljaPwd: null
+			startDate: moment('2017-11-30'),
+			focused: false
 		};
 	}
 
-	onYanoljaIdChange (ev) {
-		this.setState({
-			yanoljaId: ev.target.value
-		});
-	}
+	componentWillMount () {
+		const startDate = this.state.startDate.format('YYMMDD');
 
-	onYanoljaPwdChange (ev) {
-		this.setState({
-			yanoljaPwd: ev.target.value
-		});
-	}
-
-	getReservationClick () {
-		const { yanoljaId, yanoljaPwd } = this.state;
-
-		this.props.connectSocketAction(yanoljaId, yanoljaPwd);
+		this.props.getReservationAction(
+			startDate
+		);
 	}
 
 	render () {
-		const { hitCount } = this.props;
-
 		return (
-			<div>
+			<div className='reservation'>
 				<Helmet>
 					<title>{strings.reservation}</title>
 				</Helmet>
 				<TitleHeader
-					icon='travel'
-					title={strings.reservation}
+					title={strings.realtimeReservationResult}
 				/>
-				<Input
-					placeholder={strings.yanoljaId}
-					defaultValue={this.state.yanoljaId}
-					onChange={this.onYanoljaIdChange}
-				/>
-				<Input
-					placeholder={strings.yanoljaPwd}
-					defaultValue={this.state.yanoljaPwd}
-					onChange={this.onYanoljaPwdChange}
-				/>
-				<Button
-					content={strings.getReservation}
-					onClick={this.getReservationClick}
-				/>
-				<Header as='h4' textAlign='center'>{strings.hitCount}:{hitCount}</Header>
+				<ReservationResult />
 			</div>
 		);
 	}
 }
 
 Reservation.propTypes = {
-	connectSocketAction: PropTypes.func.isRequired,
-	hitCount: PropTypes.string.isRequired
+	getReservationAction: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-	hitCount: state.hitCount
-});
-
 const mapDispatchToProps = dispatch => ({
-	connectSocketAction (yanoljaId, yanoljaPwd) {
-		dispatch(connectSocketAction(yanoljaId, yanoljaPwd));
+	getReservationAction (startDate, endDate) {
+		dispatch(getReservationAction(startDate, endDate));
 	}
 });
 
 export default withRouter(connect(
-	mapStateToProps,
+	null,
 	mapDispatchToProps
 )(Reservation));
