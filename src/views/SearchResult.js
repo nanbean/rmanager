@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Header, Table, Icon } from 'semantic-ui-react';
+import { Header, Table } from 'semantic-ui-react';
 
 import strings from '../resources/strings';
 
@@ -18,7 +18,7 @@ class SearchResult extends Component {
 		return (
 			<Table.Row key={this.key}>
 				<Table.Cell textAlign='center'>
-					<Icon name='h' />{this.name}
+					{this.name}
 				</Table.Cell>
 				<Table.Cell textAlign='center'>
 					{this.distance}
@@ -38,7 +38,7 @@ class SearchResult extends Component {
 
 		return (
 			<div className='search-result'>
-				<Table celled selectable>
+				<Table celled unstackable>
 					<Table.Header>
 						<Table.Row>
 							<Table.HeaderCell>

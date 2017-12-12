@@ -4,13 +4,21 @@ import login from './login';
 import userName from './userName';
 import userImage from './userImage';
 import hitCount from './hitCount';
+import reservation from './reservation';
+import summary from './summary';
+import summaryYanolja from './summaryYanolja';
+import summaryGoodChoice from './summaryGoodChoice';
 
 const rmanager = combineReducers({
 	search,
 	login,
 	userName,
 	userImage,
-	hitCount
+	hitCount,
+	reservation,
+	summary,
+	summaryYanolja,
+	summaryGoodChoice
 });
 
 export default rmanager;

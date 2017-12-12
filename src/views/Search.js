@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import { Header } from 'semantic-ui-react';
 
-import TitleHeader from '../components/TitleHeader';
 import SearchMap from '../components/SearchMap';
 
 import SearchResult from './SearchResult';
@@ -57,18 +56,16 @@ class Search extends Component {
 				<Helmet>
 					<title>{strings.search}</title>
 				</Helmet>
-				<TitleHeader
-					icon='search'
-					title={strings.search}
-				/>
-				<Header as='h2'>
-					{strings.searchHelp}
-				</Header>
 				<SearchMap
 					markerPositionLat={defaultMarkerPositionLat}
 					markerPositionLng={defaultMarkerPositionLng}
 					onMarkerDragEnd={this.onMarkerDragEnd}
 				/>
+				<div className='search-help'>
+					<Header as='h3' textAlign='left'>
+						{strings.realtimeSearchResult}
+					</Header>
+				</div>
 				<SearchResult />
 			</div>
 		);
